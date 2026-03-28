@@ -12,14 +12,14 @@ import { ProgressRing } from '../components/ProgressRing';
 import { colors } from '../theme/colors';
 
 const ACHIEVEMENTS = [
-  { id: 1,  icon: 'footsteps-outline',    title: 'First Steps',      desc: 'Complete your first quiz',                  xp: 50,  unlocked: true,  progress: 1,  total: 1   },
-  { id: 2,  icon: 'flame-outline',        title: 'Week Warrior',     desc: '7-day study streak',                        xp: 100, unlocked: true,  progress: 7,  total: 7   },
-  { id: 3,  icon: 'star-outline',         title: 'Perfect Score',    desc: 'Get 100% on any test',                      xp: 200, unlocked: true,  progress: 1,  total: 1   },
-  { id: 4,  icon: 'book-outline',         title: 'Knowledge Seeker', desc: 'Review 50 flashcards',                      xp: 150, unlocked: false, progress: 35, total: 50  },
-  { id: 5,  icon: 'flash-outline',        title: 'Speed Demon',      desc: 'Answer 10 questions in under 5 minutes',    xp: 175, unlocked: false, progress: 7,  total: 10  },
-  { id: 6,  icon: 'school-outline',       title: 'Master Mind',      desc: 'Achieve 90% overall accuracy',              xp: 300, unlocked: false, progress: 65, total: 90  },
-  { id: 7,  icon: 'mic-outline',          title: 'Eloquent Speaker', desc: 'Complete 10 speaking practices',            xp: 125, unlocked: false, progress: 4,  total: 10  },
-  { id: 8,  icon: 'trophy-outline',       title: 'SAT Champion',     desc: 'Score 1400+ on a mock SAT exam',            xp: 500, unlocked: false, progress: 0,  total: 1   },
+  { id: 1,  icon: 'footsteps-outline',    title: 'First Steps',      desc: 'Complete your first quiz',               xp: 50,  unlocked: false, progress: 0, total: 1  },
+  { id: 2,  icon: 'flame-outline',        title: 'Week Warrior',     desc: '7-day study streak',                     xp: 100, unlocked: false, progress: 0, total: 7  },
+  { id: 3,  icon: 'star-outline',         title: 'Perfect Score',    desc: 'Get 100% on any test',                   xp: 200, unlocked: false, progress: 0, total: 1  },
+  { id: 4,  icon: 'book-outline',         title: 'Knowledge Seeker', desc: 'Review 50 flashcards',                   xp: 150, unlocked: false, progress: 0, total: 50 },
+  { id: 5,  icon: 'flash-outline',        title: 'Speed Demon',      desc: 'Answer 10 questions in under 5 minutes', xp: 175, unlocked: false, progress: 0, total: 10 },
+  { id: 6,  icon: 'school-outline',       title: 'Master Mind',      desc: 'Achieve 90% overall accuracy',           xp: 300, unlocked: false, progress: 0, total: 90 },
+  { id: 7,  icon: 'mic-outline',          title: 'Eloquent Speaker', desc: 'Complete 10 speaking practices',         xp: 125, unlocked: false, progress: 0, total: 10 },
+  { id: 8,  icon: 'trophy-outline',       title: 'SAT Champion',     desc: 'Score 1400+ on a mock SAT exam',         xp: 500, unlocked: false, progress: 0, total: 1  },
 ];
 
 const TOTAL_XP = ACHIEVEMENTS.filter(a => a.unlocked).reduce((s, a) => s + a.xp, 0);

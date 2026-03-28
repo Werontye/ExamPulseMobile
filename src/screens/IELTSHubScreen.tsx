@@ -93,17 +93,17 @@ export function IELTSHubScreen() {
                   : navigation.navigate('Quiz', { id: mod.id })
                 }
               >
-                <View style={{ flex: 1, alignItems: 'flex-start', gap: 10, marginRight: 8 }}>
+                <View style={styles.modCardTop}>
                   <View style={[styles.modIcon, { backgroundColor: mod.color + '22' }]}>
                     <Ionicons name={mod.icon as any} size={20} color={mod.color} />
                   </View>
-                  <Text style={styles.modTitle} numberOfLines={1}>{mod.title}</Text>
-                  <Text style={[styles.modBand, { color: mod.color }]} numberOfLines={1}>Band {mod.band}</Text>
-                  <View style={styles.barBg}>
-                    <View style={[styles.barFill, { width: `${mod.progress}%`, backgroundColor: mod.color }]} />
-                  </View>
+                  <ProgressRing progress={mod.progress} size={44} strokeWidth={4} color={mod.color} showValue={false} />
                 </View>
-                <ProgressRing progress={mod.progress} size={52} strokeWidth={5} color={mod.color} showValue={false} />
+                <Text style={styles.modTitle} numberOfLines={1}>{mod.title}</Text>
+                <Text style={[styles.modBand, { color: mod.color }]}>Band {mod.band}</Text>
+                <View style={styles.barBg}>
+                  <View style={[styles.barFill, { width: `${mod.progress}%`, backgroundColor: mod.color }]} />
+                </View>
               </GlassCard>
             ))}
           </View>
@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
   bandBar: { width: '100%', borderRadius: 4 },
   bandLabel: { fontSize: 10, color: 'rgba(255,255,255,0.5)' },
   modulesGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  modCard: { width: '47%', padding: 14, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
+  modCard: { width: '47%', padding: 14, gap: 8 },
+  modCardTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 2 },
   modIcon: { width: 36, height: 36, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   modTitle: { fontSize: 14, fontWeight: '700', color: 'white' },
   modBand: { fontSize: 13, fontWeight: '600' },

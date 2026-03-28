@@ -32,22 +32,18 @@ function FadeInView({ children, delay = 0 }: { children: React.ReactNode; delay?
 }
 
 const STATS = [
-  { icon: 'flame',       value: '12',    label: 'Day Streak',   color: '#f97316' },
-  { icon: 'book',        value: '1,247', label: 'Questions',    color: colors.primary },
-  { icon: 'checkmark-circle', value: '84%', label: 'Accuracy', color: colors.success },
+  { icon: 'flame',            value: '0',   label: 'Day Streak', color: '#f97316' },
+  { icon: 'book',             value: '0',   label: 'Questions',  color: colors.primary },
+  { icon: 'checkmark-circle', value: '0%',  label: 'Accuracy',   color: colors.success },
 ];
 
 const TODAY_TASKS = [
-  { id: 1, title: 'SAT Math Practice', subtitle: '20 questions · 25 min', done: true,  icon: 'calculator-outline' },
+  { id: 1, title: 'SAT Math Practice', subtitle: '20 questions · 25 min', done: false, icon: 'calculator-outline' },
   { id: 2, title: 'IELTS Reading',     subtitle: '15 questions · 20 min', done: false, icon: 'book-outline'       },
   { id: 3, title: 'Speaking Practice', subtitle: '3 questions · 15 min',  done: false, icon: 'mic-outline'        },
 ];
 
-const RECENT = [
-  { title: 'SAT Math Quiz',    score: '18/20', pct: 90, color: colors.success  },
-  { title: 'IELTS Reading',    score: '12/15', pct: 80, color: colors.primary  },
-  { title: 'Writing Practice', score: '8/10',  pct: 80, color: colors.purple   },
-];
+const RECENT: { title: string; score: string; pct: number; color: string }[] = [];
 
 export function DashboardScreen() {
   const navigation = useNavigation<Nav>() as any;
@@ -110,12 +106,12 @@ export function DashboardScreen() {
             <View style={styles.progressRow}>
               <View style={{ flex: 1, gap: 6 }}>
                 <Text style={styles.sectionTitle}>Overall Progress</Text>
-                <Text style={styles.progressSub}>Keep it up — you're ahead of schedule!</Text>
+                <Text style={styles.progressSub}>Complete quizzes to track your progress</Text>
                 <View style={styles.progressBars}>
                   {[
-                    { label: 'SAT Math',     pct: 78, color: colors.primary },
-                    { label: 'IELTS Reading', pct: 65, color: colors.cyan   },
-                    { label: 'Speaking',      pct: 72, color: colors.purple  },
+                    { label: 'SAT Math',      pct: 0, color: colors.primary },
+                    { label: 'IELTS Reading', pct: 0, color: colors.cyan   },
+                    { label: 'Speaking',      pct: 0, color: colors.purple  },
                   ].map((b, i) => (
                     <View key={i} style={{ gap: 4 }}>
                       <View style={styles.barLabelRow}>
@@ -129,7 +125,7 @@ export function DashboardScreen() {
                   ))}
                 </View>
               </View>
-              <ProgressRing progress={72} size={90} label="Overall" color={colors.primary} />
+              <ProgressRing progress={0} size={90} label="Overall" color={colors.primary} />
             </View>
           </GlassCard>
         </FadeInView>
@@ -142,14 +138,14 @@ export function DashboardScreen() {
               <LinearGradient colors={['#6366f1', '#8b5cf6']} style={styles.moduleCard}>
                 <Ionicons name="book" size={28} color="white" />
                 <Text style={styles.moduleTitle}>SAT</Text>
-                <Text style={styles.moduleSub}>1280 / 1600</Text>
+                <Text style={styles.moduleSub}>Start practising</Text>
               </LinearGradient>
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 1 }} onPress={() => navigation.navigate('IELTS')} activeOpacity={0.85}>
               <LinearGradient colors={['#06b6d4', '#3b82f6']} style={styles.moduleCard}>
                 <Ionicons name="globe" size={28} color="white" />
                 <Text style={styles.moduleTitle}>IELTS</Text>
-                <Text style={styles.moduleSub}>Band 6.5</Text>
+                <Text style={styles.moduleSub}>Start practising</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -183,21 +179,30 @@ export function DashboardScreen() {
         {/* Recent Activity */}
         <FadeInView delay={480}>
           <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Recent Activity</Text>
-          <View style={{ gap: 10 }}>
-            {RECENT.map((r, i) => (
-              <GlassCard key={i} style={styles.recentCard}>
-                <View style={styles.recentRow}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.recentTitle}>{r.title}</Text>
-                    <Text style={styles.recentScore}>{r.score}</Text>
+          {RECENT.length === 0 ? (
+            <GlassCard style={{ padding: 20, alignItems: 'center', gap: 8 }}>
+              <Ionicons name="time-outline" size={28} color="rgba(255,255,255,0.2)" />
+              <Text style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', textAlign: 'center' }}>
+                No activity yet. Complete a quiz to see your results here.
+              </Text>
+            </GlassCard>
+          ) : (
+            <View style={{ gap: 10 }}>
+              {RECENT.map((r, i) => (
+                <GlassCard key={i} style={styles.recentCard}>
+                  <View style={styles.recentRow}>
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.recentTitle}>{r.title}</Text>
+                      <Text style={styles.recentScore}>{r.score}</Text>
+                    </View>
+                    <View style={styles.recentBadge}>
+                      <Text style={[styles.recentPct, { color: r.color }]}>{r.pct}%</Text>
+                    </View>
                   </View>
-                  <View style={styles.recentBadge}>
-                    <Text style={[styles.recentPct, { color: r.color }]}>{r.pct}%</Text>
-                  </View>
-                </View>
-              </GlassCard>
-            ))}
-          </View>
+                </GlassCard>
+              ))}
+            </View>
+          )}
         </FadeInView>
       </ScrollView>
     </View>

@@ -57,23 +57,24 @@ export function FlashcardsScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
+  const afterSwipe = (kn: boolean) => {
+    if (cardIdx >= CARDS.length - 1) {
+      setFinished(true);
+    } else {
+      setCardIdx(i => i + 1);
+      setFlipped(false);
+      flipAnim.value = 0;
+      swipeX.value   = 0;
+      swipeO.value   = withTiming(1, { duration: 300 });
+    }
+  };
+
   const nextCard = (kn: boolean) => {
     if (kn) setKnown(k => [...k, cardIdx]);
     else    setReview(r => [...r, cardIdx]);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-
     swipeO.value = withTiming(0, { duration: 200 }, () => {
-      runOnJS(() => {
-        if (cardIdx >= CARDS.length - 1) {
-          setFinished(true);
-        } else {
-          setCardIdx(i => i + 1);
-          setFlipped(false);
-          flipAnim.value = 0;
-          swipeX.value   = 0;
-          swipeO.value   = withTiming(1, { duration: 300 });
-        }
-      })();
+      runOnJS(afterSwipe)(kn);
     });
   };
 
