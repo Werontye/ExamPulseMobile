@@ -45,7 +45,7 @@ function analyzeResponse(transcript: string, durationSec: number) {
   if (fillers.length > 3) tips.push(`You used ${fillers.length} filler words. Practice replacing them with pauses.`);
   if (tips.length === 0) tips.push('Great response! Keep practising to maintain this level.', 'Try Part 3 questions to challenge your abstract thinking.');
 
-  return { overall, fluency, lexical, grammar, pronunc, wc, wpm: Math.round(wpm), fillers: [...new Set(fillers)], uniqueWords, sentences: sentences.length };
+  return { overall, fluency, lexical, grammar, pronunc, wc, wpm: Math.round(wpm), fillers: [...new Set(fillers)], uniqueWords, sentences: sentences.length, tips };
 }
 
 function getRandomQuestion(): SpeakingQuestion {
@@ -295,7 +295,7 @@ export function SpeakingScreen() {
         {/* Tips */}
         <GlassCard style={{ padding: 16, gap: 10 }}>
           <Text style={styles.tipsTitle}>Improvement Tips</Text>
-          {result.tips?.map((t, i) => (
+          {result.tips?.map((t: string, i: number) => (
             <View key={i} style={styles.tipRow}>
               <Ionicons name="bulb-outline" size={16} color={colors.warning} />
               <Text style={[styles.tipText, { flex: 1 }]}>{t}</Text>

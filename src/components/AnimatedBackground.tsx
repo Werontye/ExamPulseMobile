@@ -32,16 +32,16 @@ function Orb({ orb }: { orb: (typeof ORBS)[0] }) {
   useEffect(() => {
     tx.value = withRepeat(
       withSequence(
-        withTiming(20, { duration: orb.duration, easing: Easing.inOut(Easing.sine) }),
-        withTiming(-15, { duration: orb.duration, easing: Easing.inOut(Easing.sine) }),
+        withTiming(20, { duration: orb.duration, easing: Easing.inOut(Easing.sin) }),
+        withTiming(-15, { duration: orb.duration, easing: Easing.inOut(Easing.sin) }),
       ),
       -1,
       true
     );
     ty.value = withRepeat(
       withSequence(
-        withTiming(-18, { duration: orb.duration * 1.1, easing: Easing.inOut(Easing.sine) }),
-        withTiming(22, { duration: orb.duration * 0.9, easing: Easing.inOut(Easing.sine) }),
+        withTiming(-18, { duration: orb.duration * 1.1, easing: Easing.inOut(Easing.sin) }),
+        withTiming(22, { duration: orb.duration * 0.9, easing: Easing.inOut(Easing.sin) }),
       ),
       -1,
       true

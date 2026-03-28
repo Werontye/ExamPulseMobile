@@ -6,8 +6,10 @@ import Animated, {
   useAnimatedProps,
   withTiming,
   Easing,
-  useDerivedValue,
+  useAnimatedReaction,
+  runOnJS,
 } from 'react-native-reanimated';
+import { useState } from 'react';
 import { colors } from '../theme/colors';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -46,8 +48,10 @@ export function ProgressRing({
     strokeDashoffset: circumference - (circumference * animProgress.value) / 100,
   }));
 
-  const displayValue = useDerivedValue(() =>
-    Math.round(animProgress.value).toString()
+  const [displayValue, setDisplayValue] = useState(0);
+  useAnimatedReaction(
+    () => Math.round(animProgress.value),
+    (val) => { if (val !== displayValue) runOnJS(setDisplayValue)(val); }
   );
 
   return (
@@ -79,9 +83,9 @@ export function ProgressRing({
       </Svg>
       {showValue && (
         <View style={styles.center}>
-          <Animated.Text style={[styles.value, { color, fontSize: size * 0.22 }]}>
+          <Text style={[styles.value, { color, fontSize: size * 0.22 }]}>
             {displayValue}
-          </Animated.Text>
+          </Text>
           {label ? (
             <Text style={[styles.label, { fontSize: size * 0.1 }]}>{label}</Text>
           ) : null}

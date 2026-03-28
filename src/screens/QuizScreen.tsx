@@ -154,7 +154,7 @@ export function QuizScreen() {
 
         {/* Question card */}
         <Animated.View style={cardStyle}>
-          <GlassCard style={styles.qCard} hover={false}>
+          <GlassCard style={styles.qCard}>
             <Text style={styles.questionText}>{q.question}</Text>
           </GlassCard>
         </Animated.View>

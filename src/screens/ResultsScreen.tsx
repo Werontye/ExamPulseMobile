@@ -158,7 +158,7 @@ export function ResultsScreen() {
         {/* Strengths & Weaknesses */}
         <FadeIn delay={340}>
           <View style={{ flexDirection: 'row', gap: 12 }}>
-            <GlassCard style={[styles.swCard, { borderColor: 'rgba(16,185,129,0.3)' }]}>
+            <GlassCard style={{ ...styles.swCard, borderColor: 'rgba(16,185,129,0.3)' }}>
               <View style={styles.swHeader}>
                 <Ionicons name="trending-up" size={16} color={colors.success} />
                 <Text style={[styles.swTitle, { color: colors.success }]}>Strengths</Text>
@@ -167,7 +167,7 @@ export function ResultsScreen() {
                 <Text key={i} style={styles.swItem}>• {t.topic}</Text>
               ))}
             </GlassCard>
-            <GlassCard style={[styles.swCard, { borderColor: 'rgba(239,68,68,0.3)' }]}>
+            <GlassCard style={{ ...styles.swCard, borderColor: 'rgba(239,68,68,0.3)' }}>
               <View style={styles.swHeader}>
                 <Ionicons name="trending-down" size={16} color={colors.error} />
                 <Text style={[styles.swTitle, { color: colors.error }]}>Weaknesses</Text>

@@ -37,7 +37,7 @@ const WEAK_TOPICS = [
 ];
 
 export function SATHubScreen() {
-  const navigation = useNavigation<Nav>();
+  const navigation = useNavigation<Nav>() as any;
   const insets     = useSafeAreaInsets();
 
   return (

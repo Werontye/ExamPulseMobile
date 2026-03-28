@@ -47,7 +47,7 @@ function AchievementCard({ a, delay }: { a: typeof ACHIEVEMENTS[0]; delay: numbe
 
   return (
     <Animated.View style={s}>
-      <GlassCard style={[styles.achCard, !a.unlocked && styles.lockedCard]}>
+      <GlassCard style={[styles.achCard, !a.unlocked && styles.lockedCard] as any}>
         {a.unlocked && <View style={styles.unlockedGlow} />}
         <View style={[styles.iconCircle, { backgroundColor: bgColor }]}>
           <Ionicons name={a.icon as any} size={26} color={iconColor} />

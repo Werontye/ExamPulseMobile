@@ -34,7 +34,7 @@ const MODULES = [
 const BAND_HISTORY = [5.0, 5.5, 6.0, 6.0, 6.5, 6.5];
 
 export function IELTSHubScreen() {
-  const navigation = useNavigation<Nav>();
+  const navigation = useNavigation<Nav>() as any;
   const insets     = useSafeAreaInsets();
 
   return (
