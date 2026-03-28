@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "ExamPulse",
+    "slug": "exampulse",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0f"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0a0a0f"
+      },
+      "package": "com.heelum.exampulse",
+      "versionCode": 1
+    },
+    "owner": "heelum",
+    "extra": {
+      "eas": {
+        "projectId": "45bd70f2-a9d3-46ad-8e76-edf4aed4af67"
+      }
+    }
+  }
+}
