@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions,
 } from 'react-native';
@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { GlassCard } from '../components/GlassCard';
 import { ProgressRing } from '../components/ProgressRing';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '../theme/colors';
 import { RootStackParamList } from '../navigation';
 
@@ -51,6 +52,11 @@ const RECENT = [
 export function DashboardScreen() {
   const navigation = useNavigation<Nav>() as any;
   const insets     = useSafeAreaInsets();
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    AsyncStorage.getItem('userName').then(n => { if (n) setUserName(n); });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -64,11 +70,13 @@ export function DashboardScreen() {
         <FadeInView delay={0}>
           <View style={styles.header}>
             <View>
-              <Text style={styles.greeting}>Welcome back, Alex! 👋</Text>
+              <Text style={styles.greeting}>Welcome back, {userName || 'there'}!</Text>
               <Text style={styles.date}>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</Text>
             </View>
             <LinearGradient colors={['#6366f1', '#8b5cf6']} style={styles.avatar}>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>A</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 16 }}>
+                {userName ? userName[0].toUpperCase() : '?'}
+              </Text>
             </LinearGradient>
           </View>
         </FadeInView>

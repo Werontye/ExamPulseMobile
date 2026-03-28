@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View, Text, StyleSheet, Dimensions, FlatList, TouchableOpacity, ViewToken,
 } from 'react-native';
@@ -53,7 +53,7 @@ export function OnboardingScreen() {
     if (current < SLIDES.length - 1) {
       flatRef.current?.scrollToIndex({ index: current + 1, animated: true });
     } else {
-      navigation.replace('MainTabs');
+      navigation.replace('Setup');
     }
   };
 
@@ -77,18 +77,7 @@ export function OnboardingScreen() {
 
       {/* Dots */}
       <View style={styles.dots}>
-        {SLIDES.map((_, i) => (
-          <Animated.View
-            key={i}
-            style={[
-              styles.dot,
-              {
-                width: i === current ? 24 : 8,
-                backgroundColor: i === current ? colors.primary : 'rgba(255,255,255,0.25)',
-              },
-            ]}
-          />
-        ))}
+        {SLIDES.map((_, i) => <AnimatedDot key={i} active={i === current} />)}
       </View>
 
       {/* Button */}
@@ -103,12 +92,23 @@ export function OnboardingScreen() {
 
       {/* Skip */}
       {current < SLIDES.length - 1 && (
-        <TouchableOpacity onPress={() => navigation.replace('MainTabs')} style={styles.skip}>
+        <TouchableOpacity onPress={() => navigation.replace('Setup')} style={styles.skip}>
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
       )}
     </View>
   );
+}
+
+function AnimatedDot({ active }: { active: boolean }) {
+  const width = useSharedValue(active ? 24 : 8);
+  const opacity = useSharedValue(active ? 1 : 0.35);
+  useEffect(() => {
+    width.value = withTiming(active ? 24 : 8, { duration: 300 });
+    opacity.value = withTiming(active ? 1 : 0.35, { duration: 300 });
+  }, [active]);
+  const s = useAnimatedStyle(() => ({ width: width.value, opacity: opacity.value }));
+  return <Animated.View style={[styles.dot, s]} />;
 }
 
 function SlideItem({ slide, index, currentIndex }: { slide: typeof SLIDES[0]; index: number; currentIndex: number }) {

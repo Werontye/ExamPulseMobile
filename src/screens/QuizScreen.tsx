@@ -170,7 +170,9 @@ export function QuizScreen() {
                 disabled={checked}
               >
                 <View style={[styles.optionCard, {
-                  backgroundColor: optionColor(key) + (checked ? 'CC' : '33'),
+                  backgroundColor: optionColor(key) === 'transparent'
+                    ? 'transparent'
+                    : optionColor(key) + (checked ? 'CC' : '33'),
                   borderColor: optionBorder(key),
                 }]}>
                   <View style={[styles.optionKey, {

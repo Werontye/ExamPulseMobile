@@ -93,12 +93,12 @@ export function IELTSHubScreen() {
                   : navigation.navigate('Quiz', { id: mod.id })
                 }
               >
-                <View style={{ alignItems: 'flex-start', gap: 10 }}>
+                <View style={{ flex: 1, alignItems: 'flex-start', gap: 10, marginRight: 8 }}>
                   <View style={[styles.modIcon, { backgroundColor: mod.color + '22' }]}>
                     <Ionicons name={mod.icon as any} size={20} color={mod.color} />
                   </View>
-                  <Text style={styles.modTitle}>{mod.title}</Text>
-                  <Text style={[styles.modBand, { color: mod.color }]}>Band {mod.band}</Text>
+                  <Text style={styles.modTitle} numberOfLines={1}>{mod.title}</Text>
+                  <Text style={[styles.modBand, { color: mod.color }]} numberOfLines={1}>Band {mod.band}</Text>
                   <View style={styles.barBg}>
                     <View style={[styles.barFill, { width: `${mod.progress}%`, backgroundColor: mod.color }]} />
                   </View>

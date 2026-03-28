@@ -20,10 +20,12 @@ import { QuizScreen } from '../screens/QuizScreen';
 import { MockExamScreen } from '../screens/MockExamScreen';
 import { ResultsScreen } from '../screens/ResultsScreen';
 import { FlashcardsScreen } from '../screens/FlashcardsScreen';
+import { SetupScreen } from '../screens/SetupScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
   Onboarding: undefined;
+  Setup: undefined;
   MainTabs: undefined;
   Quiz: { id: string; section?: string };
   MockExam: { id: string };
@@ -88,7 +90,7 @@ function MainTabs() {
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, animation: 'shift' }}
     >
       <Tab.Screen name="Dashboard"    component={DashboardScreen}    />
       <Tab.Screen name="SAT"          component={SATHubScreen}       />
@@ -112,7 +114,7 @@ export function AppNavigator() {
       >
         <Stack.Screen name="Splash"      component={SplashScreen}    />
         <Stack.Screen name="Onboarding"  component={OnboardingScreen} options={{ animation: 'slide_from_right' }} />
-        {/* Auth screen disabled */}
+        <Stack.Screen name="Setup"       component={SetupScreen}      options={{ animation: 'slide_from_right' }} />
         <Stack.Screen name="MainTabs"    component={MainTabs}         options={{ animation: 'fade' }} />
         <Stack.Screen name="Quiz"        component={QuizScreen}       options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="MockExam"    component={MockExamScreen}   options={{ animation: 'slide_from_bottom' }} />

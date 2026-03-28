@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 import { colors } from '../theme/colors';
 import { RootStackParamList } from '../navigation';
@@ -41,7 +42,10 @@ export function SplashScreen() {
     tagOpacity.value = withDelay(750, withTiming(1, { duration: 500 }));
     tagY.value       = withDelay(750, withTiming(0, { duration: 500, easing: Easing.out(Easing.cubic) }));
 
-    const t = setTimeout(() => navigation.replace('Onboarding'), 3000);
+    const t = setTimeout(async () => {
+      const userName = await AsyncStorage.getItem('userName');
+      navigation.replace(userName ? 'MainTabs' : 'Onboarding');
+    }, 3000);
     return () => clearTimeout(t);
   }, []);
 
